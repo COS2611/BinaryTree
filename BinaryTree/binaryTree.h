@@ -61,7 +61,6 @@ public:
     ~binaryTreeType();
       //destructor
 
-	binaryTreeNode<elemType> *createNode(elemType info);
 	
 protected:
     binaryTreeNode<elemType>  *root;
@@ -291,14 +290,35 @@ int binaryTreeType<elemType>::leavesCount(binaryTreeNode<elemType> *p) const
 }
 
 
+/// OUTSIDE OF CLASS binaryTreeType
+/*----------------------------------------------------------------------------------*/
 template <class elemType>
-binaryTreeNode<elemType>* binaryTreeType<elemType>::createNode(elemType info)
+binaryTreeNode<elemType>* createNode(elemType info)
 {
 	binaryTreeNode<elemType> *newNode = new binaryTreeNode<elemType>();
-	newNode->data = data;
-	newNode->left = nullptr;
-	newNode->right = nullptr;
+	newNode->info = info;
+	newNode->llink = NULL;
+	newNode->rlink = NULL;
 	return newNode;
+}
+
+
+template <class elemType>
+binaryTreeNode<elemType>* createTree()
+{
+	// create a root node
+	binaryTreeNode<elemType>* root = createNode(53);
+	
+	// add second level
+	root->llink = createNode(24);
+	root->rlink = createNode(59);
+	
+	// add third level
+	root->llink->llink = createNode(14);
+	root->llink->rlink = createNode(28);
+	root->rlink->rlink = createNode(85);
+	
+	return root;
 }
 
 #endif

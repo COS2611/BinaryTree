@@ -99,9 +99,49 @@ static void test_traverseTree()
 	traverseTree(myTree);
 }
 
+template <class Type>
+int leavesCount(binaryTreeNode<Type>* root)
+{
+	if (!root)
+	{
+		return 0;
+		
+	}
+	else if (!root->llink && !root->rlink)
+	{
+		return 1;
+		
+	}
+	else
+	{
+		return leavesCount(root->llink) + leavesCount(root->rlink);
+	}
+}
+
+
+static binaryTreeNode<int> *createBinaryTree()
+{
+	binaryTreeNode<int>* root = createNode(53);
+	
+	// add second level
+	root->llink = createNode(24);
+	root->rlink = createNode(59);
+	
+	// add third level
+	root->llink->llink = createNode(14);
+	root->llink->rlink = createNode(28);
+	root->rlink->rlink = createNode(85);
+	return root;
+}
+
 int main()
 {
-	test_traverseTree();
+	// create a binary tree
+	binaryTreeNode<int> * root = createBinaryTree();
+	
+	// count the number of leaf nodes
+	int numLeaves = leavesCount(root);
+	std::cout << "Number of leaf nodes: " << numLeaves << std::endl;
 
 	return 0;
 }
