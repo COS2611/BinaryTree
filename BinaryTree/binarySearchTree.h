@@ -15,29 +15,29 @@
 
 using namespace std;
 
-template <class elemType>
-class bSearchTreeType: public binaryTreeType<elemType>
+template <class Type>
+class bSearchTreeType: public binaryTreeType<Type>
 {
 public:
-    bool search(const elemType& searchItem) const;
+    bool search(const Type& searchItem) const;
       //Function to determine if searchItem is in the binary 
       //search tree.
       //Postcondition: Returns true if searchItem is found in the 
       //    binary search tree; otherwise, returns false.
 
-    void insert(const elemType& insertItem);
+    void insert(const Type& insertItem);
       //Function to insert insertItem in the binary search tree.
       //Postcondition: If no node in the binary search tree has the
       //    same info as insertItem, a node with the info insertItem
       //    is created and inserted in the binary search tree.
 
-    void deleteNode(const elemType& deleteItem);
+    void deleteNode(const Type& deleteItem);
       //Function to delete deleteItem from the binary search tree 
       //Postcondition: If a node with the same info as deleteItem 
       //    is found, it is deleted from the binary search tree.
 
 private:
-    void deleteFromTree(binaryTreeNode<elemType>* &p);
+    void deleteFromTree(binaryTreeNode<Type>* &p);
       //Function to delete the node to which p points is deleted
       //from the binary search tree.
       //Postcondition: The node to which p points is deleted from
@@ -45,18 +45,18 @@ private:
 };
 
 
-template <class elemType>
-bool bSearchTreeType<elemType>::
-              search(const elemType& searchItem) const
+template <class Type>
+bool bSearchTreeType<Type>::
+              search(const Type& searchItem) const
 {
-    binaryTreeNode<elemType> *current;
+    binaryTreeNode<Type> *current;
     bool found = false;
 
-    if (binaryTreeType<elemType>::root == NULL)
+    if (binaryTreeType<Type>::root == NULL)
        cerr << "Cannot search the empty tree." << endl;
     else
     { 
-        current = binaryTreeType<elemType>::root;
+        current = binaryTreeType<Type>::root;
 
         while (current != NULL && !found)
         {
@@ -72,24 +72,24 @@ bool bSearchTreeType<elemType>::
     return found;
 }//end search
 
-template <class elemType>
-void bSearchTreeType<elemType>::insert(const elemType& insertItem)
+template <class Type>
+void bSearchTreeType<Type>::insert(const Type& insertItem)
 {
-    binaryTreeNode<elemType> *current;  	//pointer to traverse the tree
-    binaryTreeNode<elemType> *trailCurrent; //pointer behind current
-    binaryTreeNode<elemType> *newNode;  	//pointer to create the node
+    binaryTreeNode<Type> *current;  	//pointer to traverse the tree
+    binaryTreeNode<Type> *trailCurrent; //pointer behind current
+    binaryTreeNode<Type> *newNode;  	//pointer to create the node
 
-    newNode = new binaryTreeNode<elemType>;
+    newNode = new binaryTreeNode<Type>;
     assert(newNode != NULL);
     newNode->info = insertItem;
     newNode->llink = NULL;
     newNode->rlink = NULL;
 
-    if (binaryTreeType<elemType>::root == NULL)
-        binaryTreeType<elemType>::root = newNode;
+    if (binaryTreeType<Type>::root == NULL)
+        binaryTreeType<Type>::root = newNode;
     else
     {
-        current = binaryTreeType<elemType>::root;
+        current = binaryTreeType<Type>::root;
  
         while (current != NULL)
         {
@@ -115,19 +115,19 @@ void bSearchTreeType<elemType>::insert(const elemType& insertItem)
     }
 }//end insert
 
-template <class elemType>
-void bSearchTreeType<elemType>::deleteNode(const elemType& deleteItem)
+template <class Type>
+void bSearchTreeType<Type>::deleteNode(const Type& deleteItem)
 {
-    binaryTreeNode<elemType> *current;  //pointer to traverse the tree
-    binaryTreeNode<elemType> *trailCurrent; //pointer behind current
+    binaryTreeNode<Type> *current;  //pointer to traverse the tree
+    binaryTreeNode<Type> *trailCurrent; //pointer behind current
     bool found = false;
 
-    if (binaryTreeType<elemType>::root == NULL)
+    if (binaryTreeType<Type>::root == NULL)
         cout << "Cannot delete from the empty tree." << endl;
     else
     {
-        current = binaryTreeType<elemType>::root;
-        trailCurrent = binaryTreeType<elemType>::root;
+        current = binaryTreeType<Type>::root;
+        trailCurrent = binaryTreeType<Type>::root;
 
         while (current != NULL && !found)
         {
@@ -148,8 +148,8 @@ void bSearchTreeType<elemType>::deleteNode(const elemType& deleteItem)
             cout << "The delete item is not in the tree." << endl;
         else if (found)
         {
-            if (current == binaryTreeType<elemType>::root)
-                deleteFromTree(binaryTreeType<elemType>::root);
+            if (current == binaryTreeType<Type>::root)
+                deleteFromTree(binaryTreeType<Type>::root);
             else if (trailCurrent->info > deleteItem)
                 deleteFromTree(trailCurrent->llink);
             else
@@ -158,13 +158,13 @@ void bSearchTreeType<elemType>::deleteNode(const elemType& deleteItem)
     }
 }//end deleteNode
 
-template <class elemType>
-void bSearchTreeType<elemType>::deleteFromTree
-                                 (binaryTreeNode<elemType>* &p)
+template <class Type>
+void bSearchTreeType<Type>::deleteFromTree
+                                 (binaryTreeNode<Type>* &p)
 {
-    binaryTreeNode<elemType> *current; //pointer to traverse the tree
-    binaryTreeNode<elemType> *trailCurrent;   //pointer behind current
-    binaryTreeNode<elemType> *temp;        //pointer to delete the node
+    binaryTreeNode<Type> *current; //pointer to traverse the tree
+    binaryTreeNode<Type> *trailCurrent;   //pointer behind current
+    binaryTreeNode<Type> *temp;        //pointer to delete the node
 
     if (p == NULL)
         cerr << "Error: The node to be deleted is NULL." << endl;

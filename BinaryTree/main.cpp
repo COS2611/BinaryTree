@@ -134,14 +134,40 @@ static binaryTreeNode<int> *createBinaryTree()
 	return root;
 }
 
+static void test_leavesCount()
+{
+	// Test 0: binary tree created with createBinaryTree()
+	binaryTreeNode<int> * root = createBinaryTree();
+	assert(leavesCount(root) == 3);
+	
+	// Test 1: Check that the function returns 0 for an empty tree
+	binaryTreeNode<int>* empty_tree = NULL;
+	assert(leavesCount(empty_tree) == 0);
+	
+	// Test 2: Check that the function returns 1 for a tree with a single node
+	binaryTreeNode<int>* single_node_tree = new binaryTreeNode<int>(5);
+	assert(leavesCount(single_node_tree) == 1);
+	
+	// Test 3: Check that the function returns the correct number of leaves for a tree with multiple nodes
+	binaryTreeNode<int>* multi_node_tree = new binaryTreeNode<int>(5);
+	multi_node_tree->llink = new binaryTreeNode<int>(3);
+	multi_node_tree->rlink = new binaryTreeNode<int>(7);
+	multi_node_tree->llink->llink = new binaryTreeNode<int>(1);
+	multi_node_tree->llink->rlink = new binaryTreeNode<int>(4);
+	assert(leavesCount(multi_node_tree) == 3);
+	
+	// Test 4: Check that the function returns the correct number of leaves for a tree with a single branch
+	binaryTreeNode<int>* single_branch_tree = new binaryTreeNode<int>(5);
+	single_branch_tree->llink = new binaryTreeNode<int>(3);
+	single_branch_tree->llink->llink = new binaryTreeNode<int>(1);
+	single_branch_tree->llink->rlink = new binaryTreeNode<int>(4);
+	assert(leavesCount(single_branch_tree) == 2);
+}
+
+
 int main()
 {
-	// create a binary tree
-	binaryTreeNode<int> * root = createBinaryTree();
-	
-	// count the number of leaf nodes
-	int numLeaves = leavesCount(root);
-	std::cout << "Number of leaf nodes: " << numLeaves << std::endl;
+	test_leavesCount();
 
 	return 0;
 }

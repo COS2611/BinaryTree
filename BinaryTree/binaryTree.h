@@ -15,22 +15,30 @@
 using namespace std;
 
      //Definition of the node
-template <class elemType>
+template <class Type>
 struct binaryTreeNode
 {
-    elemType info;
-    binaryTreeNode<elemType> *llink;
-    binaryTreeNode<elemType> *rlink;
+    Type info;
+    binaryTreeNode<Type> *llink;
+    binaryTreeNode<Type> *rlink;
+	
+	// default constructor
+	binaryTreeNode()
+		: info(NULL), llink(NULL), rlink(NULL) {}
+	
+	// overloaded constructor
+	binaryTreeNode(Type info)
+		: info(info), llink(NULL), rlink(NULL) {}
 };
 
    //Definition of the class
-template <class elemType>
+template <class Type>
 class binaryTreeType
 {
 	
 public:
-    const binaryTreeType<elemType>& operator=
-                 (const binaryTreeType<elemType>&);
+    const binaryTreeType<Type>& operator=
+                 (const binaryTreeType<Type>&);
       //Overload the assignment operator.
     bool isEmpty() const;
       //Returns true if the binary tree is empty;
@@ -52,7 +60,7 @@ public:
       //Deallocates the memory space occupied by the binary tree.
       //Postcondition: root = NULL;
 
-    binaryTreeType(const binaryTreeType<elemType>& otherTree);
+    binaryTreeType(const binaryTreeType<Type>& otherTree);
       //copy constructor
 
     binaryTreeType();
@@ -63,110 +71,110 @@ public:
 
 	
 protected:
-    binaryTreeNode<elemType>  *root;
+    binaryTreeNode<Type>  *root;
 
 private:
-    void copyTree(binaryTreeNode<elemType>* &copiedTreeRoot,
-                  binaryTreeNode<elemType>* otherTreeRoot);
+    void copyTree(binaryTreeNode<Type>* &copiedTreeRoot,
+                  binaryTreeNode<Type>* otherTreeRoot);
       //Makes a copy of the binary tree to which
       //otherTreeRoot points. The pointer copiedTreeRoot
       //points to the root of the copied binary tree.
 
-    void destroy(binaryTreeNode<elemType>* &p);
+    void destroy(binaryTreeNode<Type>* &p);
       //Function to destroy the binary tree to which p points. 
       //Postcondition: p = NULL
 
-    void inorder(binaryTreeNode<elemType> *p) const;
+    void inorder(binaryTreeNode<Type> *p) const;
       //Function to do an inorder traversal of the binary
       //tree to which p points.  
-    void preorder(binaryTreeNode<elemType> *p) const;
+    void preorder(binaryTreeNode<Type> *p) const;
       //Function to do a preorder traversal of the binary
       //tree to which p points.  
-    void postorder(binaryTreeNode<elemType> *p) const;
+    void postorder(binaryTreeNode<Type> *p) const;
       //Function to do a postorder traversal of the binary
       //tree to which p points.  
 
-    int height(binaryTreeNode<elemType> *p) const;
+    int height(binaryTreeNode<Type> *p) const;
       //Function to return the height of the binary tree
       //to which p points. 
     int max(int x, int y) const;
       //Returns the larger of x and y.
-    int nodeCount(binaryTreeNode<elemType> *p) const;
+    int nodeCount(binaryTreeNode<Type> *p) const;
       //Function to return the number of nodes in the binary 
       //tree to which p points 
-    int leavesCount(binaryTreeNode<elemType> *p) const;
+    int leavesCount(binaryTreeNode<Type> *p) const;
       //Function to return the number of leaves in the binary 
       //tree to which p points 
 };
 
     //Definition of member functions
 
-template <class elemType>
-binaryTreeType<elemType>::binaryTreeType()
+template <class Type>
+binaryTreeType<Type>::binaryTreeType()
 {
     root = NULL;
 }
 
-template <class elemType>
-bool binaryTreeType<elemType>::isEmpty() const
+template <class Type>
+bool binaryTreeType<Type>::isEmpty() const
 {
     return (root == NULL);
 }
 
-template <class elemType>
-void binaryTreeType<elemType>::inorderTraversal() const
+template <class Type>
+void binaryTreeType<Type>::inorderTraversal() const
 {
     inorder(root);
 }
 
-template <class elemType>
-void binaryTreeType<elemType>::preorderTraversal() const
+template <class Type>
+void binaryTreeType<Type>::preorderTraversal() const
 {
     preorder(root);
 }
 
-template <class elemType>
-void binaryTreeType<elemType>::postorderTraversal() const
+template <class Type>
+void binaryTreeType<Type>::postorderTraversal() const
 {
     postorder(root);
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::treeHeight() const
+template <class Type>
+int binaryTreeType<Type>::treeHeight() const
 {
     return height(root);
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::treeNodeCount() const
+template <class Type>
+int binaryTreeType<Type>::treeNodeCount() const
 {
     return nodeCount(root);
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::treeLeavesCount() const
+template <class Type>
+int binaryTreeType<Type>::treeLeavesCount() const
 {
     return leavesCount(root);
 }
 
-template <class elemType>
-void  binaryTreeType<elemType>::copyTree
-                      (binaryTreeNode<elemType>* &copiedTreeRoot,
-		               binaryTreeNode<elemType>* otherTreeRoot)
+template <class Type>
+void  binaryTreeType<Type>::copyTree
+                      (binaryTreeNode<Type>* &copiedTreeRoot,
+		               binaryTreeNode<Type>* otherTreeRoot)
 {
     if (otherTreeRoot == NULL)
         copiedTreeRoot = NULL;
     else
     {
-        copiedTreeRoot = new binaryTreeNode<elemType>;
+        copiedTreeRoot = new binaryTreeNode<Type>;
         copiedTreeRoot->info = otherTreeRoot->info;
         copyTree(copiedTreeRoot->llink, otherTreeRoot->llink);
         copyTree(copiedTreeRoot->rlink, otherTreeRoot->rlink);
     }
 } //end copyTree
 
-template <class elemType>
-void binaryTreeType<elemType>::inorder(binaryTreeNode<elemType> *p) const
+template <class Type>
+void binaryTreeType<Type>::inorder(binaryTreeNode<Type> *p) const
 {
     if (p != NULL)
     {
@@ -176,8 +184,8 @@ void binaryTreeType<elemType>::inorder(binaryTreeNode<elemType> *p) const
     }
 }
 
-template <class elemType>
-void binaryTreeType<elemType>::preorder(binaryTreeNode<elemType> *p) const
+template <class Type>
+void binaryTreeType<Type>::preorder(binaryTreeNode<Type> *p) const
 {
 	if (p != NULL)
 	{
@@ -187,8 +195,8 @@ void binaryTreeType<elemType>::preorder(binaryTreeNode<elemType> *p) const
 	}
 }
 
-template <class elemType>
-void binaryTreeType<elemType>::postorder(binaryTreeNode<elemType> *p) const
+template <class Type>
+void binaryTreeType<Type>::postorder(binaryTreeNode<Type> *p) const
 {
     if (p != NULL)
     {
@@ -199,9 +207,9 @@ void binaryTreeType<elemType>::postorder(binaryTreeNode<elemType> *p) const
 }
 
      //Overload the assignment operator
-template <class elemType>
-const binaryTreeType<elemType>& binaryTreeType<elemType>::
-           operator=(const binaryTreeType<elemType>& otherTree)
+template <class Type>
+const binaryTreeType<Type>& binaryTreeType<Type>::
+           operator=(const binaryTreeType<Type>& otherTree)
 {  
     if (this != &otherTree) //avoid self-copy
     {
@@ -218,8 +226,8 @@ const binaryTreeType<elemType>& binaryTreeType<elemType>::
     return *this; 
 }
 
-template <class elemType>
-void  binaryTreeType<elemType>::destroy(binaryTreeNode<elemType>* &p)
+template <class Type>
+void  binaryTreeType<Type>::destroy(binaryTreeNode<Type>* &p)
 {
     if (p != NULL)
     {
@@ -230,16 +238,16 @@ void  binaryTreeType<elemType>::destroy(binaryTreeNode<elemType>* &p)
     }
 }
 
-template <class elemType>
-void  binaryTreeType<elemType>::destroyTree()
+template <class Type>
+void  binaryTreeType<Type>::destroyTree()
 {
     destroy(root);
 }
 
 	//copy constructor
-template <class elemType>
-binaryTreeType<elemType>::binaryTreeType
-              (const binaryTreeType<elemType>& otherTree)
+template <class Type>
+binaryTreeType<Type>::binaryTreeType
+              (const binaryTreeType<Type>& otherTree)
 {
     if (otherTree.root == NULL) //otherTree is empty
         root = NULL;
@@ -247,14 +255,14 @@ binaryTreeType<elemType>::binaryTreeType
         copyTree(root, otherTree.root);
 }
 
-template <class elemType>
-binaryTreeType<elemType>::~binaryTreeType()
+template <class Type>
+binaryTreeType<Type>::~binaryTreeType()
 {
     destroy(root);
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::height(binaryTreeNode<elemType> *p) const
+template <class Type>
+int binaryTreeType<Type>::height(binaryTreeNode<Type> *p) const
 {
     if (p == NULL)
         return 0;
@@ -262,8 +270,8 @@ int binaryTreeType<elemType>::height(binaryTreeNode<elemType> *p) const
         return 1 + max(height(p->llink), height(p->rlink));
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::max(int x, int y) const
+template <class Type>
+int binaryTreeType<Type>::max(int x, int y) const
 {
     if (x >= y)
         return x;
@@ -271,8 +279,8 @@ int binaryTreeType<elemType>::max(int x, int y) const
         return y;
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::nodeCount(binaryTreeNode<elemType> *p) const
+template <class Type>
+int binaryTreeType<Type>::nodeCount(binaryTreeNode<Type> *p) const
 {
     cout << "Write the definition of the function nodeCount"
          << endl;
@@ -280,8 +288,8 @@ int binaryTreeType<elemType>::nodeCount(binaryTreeNode<elemType> *p) const
     return 0;
 }
 
-template <class elemType>
-int binaryTreeType<elemType>::leavesCount(binaryTreeNode<elemType> *p) const
+template <class Type>
+int binaryTreeType<Type>::leavesCount(binaryTreeNode<Type> *p) const
 {
     cout << "Write the definition of the function leavesCount"
          << endl;
@@ -292,10 +300,10 @@ int binaryTreeType<elemType>::leavesCount(binaryTreeNode<elemType> *p) const
 
 /// OUTSIDE OF CLASS binaryTreeType
 /*----------------------------------------------------------------------------------*/
-template <class elemType>
-binaryTreeNode<elemType>* createNode(elemType info)
+template <class Type>
+binaryTreeNode<Type>* createNode(Type info)
 {
-	binaryTreeNode<elemType> *newNode = new binaryTreeNode<elemType>();
+	binaryTreeNode<Type> *newNode = new binaryTreeNode<Type>();
 	newNode->info = info;
 	newNode->llink = NULL;
 	newNode->rlink = NULL;
@@ -303,11 +311,11 @@ binaryTreeNode<elemType>* createNode(elemType info)
 }
 
 
-template <class elemType>
-binaryTreeNode<elemType>* createTree()
+template <class Type>
+binaryTreeNode<Type>* createTree()
 {
 	// create a root node
-	binaryTreeNode<elemType>* root = createNode(53);
+	binaryTreeNode<Type>* root = createNode(53);
 	
 	// add second level
 	root->llink = createNode(24);
