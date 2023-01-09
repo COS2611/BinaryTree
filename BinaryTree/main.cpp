@@ -85,7 +85,7 @@ void traverseTree(const binaryTreeType<Type>& tree)
 }
 
 
-int main()
+static void test_traverseTree()
 {
 	bSearchTreeType<int> myTree;
 	
@@ -97,6 +97,11 @@ int main()
 	myTree.insert(3);
 	
 	traverseTree(myTree);
+}
+
+int main()
+{
+	test_traverseTree();
 
 	return 0;
 }
