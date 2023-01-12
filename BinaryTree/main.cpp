@@ -99,23 +99,22 @@ static void test_traverseTree()
 	traverseTree(myTree);
 }
 
+// TODO: Use class method for leavesCount defined in binaryTree.h
 template <class Type>
 int leavesCount(binaryTreeNode<Type>* root)
 {
 	if (!root)
 	{
 		return 0;
-		
+
 	}
+	
 	else if (!root->llink && !root->rlink)
 	{
 		return 1;
-		
 	}
-	else
-	{
-		return leavesCount(root->llink) + leavesCount(root->rlink);
-	}
+	
+	return leavesCount(root->llink) + leavesCount(root->rlink);
 }
 
 
@@ -137,8 +136,8 @@ static binaryTreeNode<int> *createBinaryTree()
 static void test_leavesCount()
 {
 	// Test 0: binary tree created with createBinaryTree()
-	binaryTreeNode<int> * root = createBinaryTree();
-	assert(leavesCount(root) == 3);
+	binaryTreeNode<int>* p = createBinaryTree();
+	assert(leavesCount(p) == 3);
 	
 	// Test 1: Check that the function returns 0 for an empty tree
 	binaryTreeNode<int>* empty_tree = NULL;
@@ -162,6 +161,8 @@ static void test_leavesCount()
 	single_branch_tree->llink->llink = new binaryTreeNode<int>(1);
 	single_branch_tree->llink->rlink = new binaryTreeNode<int>(4);
 	assert(leavesCount(single_branch_tree) == 2);
+	
+	std::cout << "All leavesCount tests passed!\n";
 }
 
 

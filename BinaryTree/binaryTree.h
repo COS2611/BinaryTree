@@ -14,7 +14,7 @@
 
 using namespace std;
 
-     //Definition of the node
+//Definition of the node
 template <class Type>
 struct binaryTreeNode
 {
@@ -35,7 +35,6 @@ struct binaryTreeNode
 template <class Type>
 class binaryTreeType
 {
-	
 public:
     const binaryTreeType<Type>& operator=
                  (const binaryTreeType<Type>&);
@@ -291,10 +290,17 @@ int binaryTreeType<Type>::nodeCount(binaryTreeNode<Type> *p) const
 template <class Type>
 int binaryTreeType<Type>::leavesCount(binaryTreeNode<Type> *p) const
 {
-    cout << "Write the definition of the function leavesCount"
-         << endl;
-
-    return 0;
+	if (!p)
+	{
+		return 0;
+	}
+	
+	else if (!p->llink && !p->rlink)
+	{
+		return 1;
+	}
+	
+	return (leavesCount(p->llink) + leavesCount(p->rlink));
 }
 
 
