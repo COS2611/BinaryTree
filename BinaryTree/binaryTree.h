@@ -290,17 +290,7 @@ int binaryTreeType<Type>::nodeCount(binaryTreeNode<Type> *p) const
 template <class Type>
 int binaryTreeType<Type>::leavesCount(binaryTreeNode<Type> *p) const
 {
-	if (!p)
-	{
-		return 0;
-	}
-	
-	else if (!p->llink && !p->rlink)
-	{
-		return 1;
-	}
-	
-	return (leavesCount(p->llink) + leavesCount(p->rlink));
+	// TODO: implement me
 }
 
 
