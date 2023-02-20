@@ -99,25 +99,6 @@ static void test_traverseTree()
 	traverseTree(myTree);
 }
 
-// TODO: Use class method for leavesCount defined in binaryTree.h
-template <class Type>
-int leavesCount(binaryTreeNode<Type>* root)
-{
-	if (!root)
-	{
-		return 0;
-
-	}
-	
-	else if (!root->llink && !root->rlink)
-	{
-		return 1;
-	}
-	
-	return leavesCount(root->llink) + leavesCount(root->rlink);
-}
-
-
 static binaryTreeNode<int> *createBinaryTree()
 {
 	binaryTreeNode<int>* root = createNode(53);
@@ -133,42 +114,106 @@ static binaryTreeNode<int> *createBinaryTree()
 	return root;
 }
 
+static bSearchTreeType<int> enterNodes()
+{
+	bSearchTreeType<int>  treeRoot, otherTreeRoot;
+	int num;
+	std::cout << "Enter numbers ending with -999" << std::endl;
+	std::cin >> num;
+	while (num != -999)
+	{
+		treeRoot.insert(num);
+		std::cin >> num;
+	}
+	return treeRoot;
+}
+
+static void test_nodeCount()
+{
+	// Test 1: Check that the function returns 0 for an empty tree
+	{
+		bSearchTreeType<int> empty_tree;
+		assert(empty_tree.treeNodeCount() == 0);
+	}
+
+	// Test 2: Check that the function returns 1 for a tree with a single node
+	{
+		bSearchTreeType<int> single_node_tree;
+		single_node_tree.insert(5);
+		assert(single_node_tree.treeNodeCount() == 1);
+	}
+
+	// Test 3: Check that the function returns the correct number of nodes for a tree with multiple nodes
+	{
+		bSearchTreeType<int> multi_node_tree;
+		multi_node_tree.insert(5);
+		multi_node_tree.insert(3);
+		multi_node_tree.insert(7);
+		multi_node_tree.insert(1);
+		multi_node_tree.insert(4);
+		assert(multi_node_tree.treeNodeCount() == 5);
+	}
+
+	// Test 4: Check that the function returns the correct number of nodes for a tree with a single branch
+	{
+		bSearchTreeType<int> single_branch_tree;
+		single_branch_tree.insert(5);
+		single_branch_tree.insert(3);
+		single_branch_tree.insert(1);
+		single_branch_tree.insert(4);
+		assert(single_branch_tree.treeNodeCount() == 4);
+	}
+}
+
+
+
 static void test_leavesCount()
 {
-	// Test 0: binary tree created with createBinaryTree()
-	binaryTreeNode<int>* p = createBinaryTree();
-	assert(leavesCount(p) == 3);
-	
 	// Test 1: Check that the function returns 0 for an empty tree
-	binaryTreeNode<int>* empty_tree = NULL;
-	assert(leavesCount(empty_tree) == 0);
-	
+	{
+		bSearchTreeType<int> empty_tree;
+		assert(empty_tree.treeLeavesCount() == 0);
+	}
+
 	// Test 2: Check that the function returns 1 for a tree with a single node
-	binaryTreeNode<int>* single_node_tree = new binaryTreeNode<int>(5);
-	assert(leavesCount(single_node_tree) == 1);
-	
+	{
+		bSearchTreeType<int> single_node_tree;
+		single_node_tree.insert(5);
+		assert(single_node_tree.treeLeavesCount() == 1);
+	}
+
 	// Test 3: Check that the function returns the correct number of leaves for a tree with multiple nodes
-	binaryTreeNode<int>* multi_node_tree = new binaryTreeNode<int>(5);
-	multi_node_tree->llink = new binaryTreeNode<int>(3);
-	multi_node_tree->rlink = new binaryTreeNode<int>(7);
-	multi_node_tree->llink->llink = new binaryTreeNode<int>(1);
-	multi_node_tree->llink->rlink = new binaryTreeNode<int>(4);
-	assert(leavesCount(multi_node_tree) == 3);
-	
+	{
+		bSearchTreeType<int> multi_node_tree;
+		multi_node_tree.insert(5);
+		multi_node_tree.insert(3);
+		multi_node_tree.insert(7);
+		multi_node_tree.insert(1);
+		multi_node_tree.insert(4);
+		assert(multi_node_tree.treeLeavesCount() == 3);
+	}
+
 	// Test 4: Check that the function returns the correct number of leaves for a tree with a single branch
-	binaryTreeNode<int>* single_branch_tree = new binaryTreeNode<int>(5);
-	single_branch_tree->llink = new binaryTreeNode<int>(3);
-	single_branch_tree->llink->llink = new binaryTreeNode<int>(1);
-	single_branch_tree->llink->rlink = new binaryTreeNode<int>(4);
-	assert(leavesCount(single_branch_tree) == 2);
-	
-	std::cout << "All leavesCount tests passed!\n";
+	{
+		bSearchTreeType<int> single_branch_tree;
+		single_branch_tree.insert(5);
+		single_branch_tree.insert(3);
+		single_branch_tree.insert(1);
+		single_branch_tree.insert(4);
+		assert(single_branch_tree.treeLeavesCount() == 2);
+	}
 }
 
 
 int main()
 {
+	bSearchTreeType<int> treeRoot = enterNodes();
+	std::cout << "Number of nodes: " << treeRoot.treeNodeCount() << std::endl;
+	std::cout << "Number of Leaves: " << treeRoot.treeLeavesCount() << std::endl;
+	std::cout << "Tree height: " << treeRoot.treeHeight() << std::endl;
+	
 	test_leavesCount();
+	test_nodeCount();
 
 	return 0;
 }
