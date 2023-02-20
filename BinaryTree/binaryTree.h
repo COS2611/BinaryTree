@@ -58,6 +58,8 @@ public:
     void destroyTree();
       //Deallocates the memory space occupied by the binary tree.
       //Postcondition: root = NULL;
+	void swapSubtrees(binaryTreeNode<Type>* p);
+	// swaps the left and right subtrees of every node in the tree
 
     binaryTreeType(const binaryTreeType<Type>& otherTree);
       //copy constructor
@@ -103,7 +105,13 @@ private:
       //tree to which p points 
     int leavesCount(binaryTreeNode<Type> *p) const;
       //Function to return the number of leaves in the binary 
-      //tree to which p points 
+      //tree to which p points
+	
+	/// Additional helpers (self-defined):
+public:
+	binaryTreeNode<Type>* getRoot() const;
+	
+	
 };
 
     //Definition of member functions
@@ -306,6 +314,34 @@ int binaryTreeType<Type>::leavesCount(binaryTreeNode<Type> *p) const
 	return leavesCount(p->llink) + leavesCount(p->rlink);
 }
 
+template <class Type>
+void binaryTreeType<Type>::swapSubtrees(binaryTreeNode<Type>* p)
+{
+	if (p == NULL)
+	{
+		return;
+	}
+	
+	// Swap subtrees of left child
+	swapSubtrees(p->llink);
+	
+	// Swap subtrees of right child
+	swapSubtrees(p->rlink);
+	
+	// Swap left and right subtrees of current node
+	binaryTreeNode<Type>* temp = p->llink;
+	p->llink = p->rlink;
+	p->rlink = temp;
+}
+
+
+template<class Type>
+binaryTreeNode<Type>* binaryTreeType<Type>::getRoot() const
+{
+	return root;
+}
+
+
 
 /// OUTSIDE OF CLASS binaryTreeType
 /*----------------------------------------------------------------------------------*/
@@ -337,5 +373,6 @@ binaryTreeNode<Type>* createTree()
 	
 	return root;
 }
+
 
 #endif
