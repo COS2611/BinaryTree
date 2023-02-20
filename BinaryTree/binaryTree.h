@@ -281,26 +281,29 @@ int binaryTreeType<Type>::max(int x, int y) const
 template <class Type>
 int binaryTreeType<Type>::nodeCount(binaryTreeNode<Type> *p) const
 {
-    cout << "Write the definition of the function nodeCount"
-         << endl;
-
-    return 0;
+	if (p == NULL)
+	{
+		return 0;
+	}
+	else if (p->llink == NULL && p->rlink == NULL)
+	{
+		return 1;
+	}
+	return 1 + nodeCount(p->llink) + nodeCount(p->rlink);
 }
 
 template <class Type>
 int binaryTreeType<Type>::leavesCount(binaryTreeNode<Type> *p) const
 {
-	if (!p)
+	if (p == NULL)
 	{
 		return 0;
 	}
-	
-	else if (!p->llink && !p->rlink)
+	else if (p->llink == NULL && p->rlink == NULL)
 	{
 		return 1;
 	}
-	
-	return (leavesCount(p->llink) + leavesCount(p->rlink));
+	return leavesCount(p->llink) + leavesCount(p->rlink);
 }
 
 

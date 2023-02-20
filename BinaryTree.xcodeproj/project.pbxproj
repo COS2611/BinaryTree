@@ -23,6 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E0F917029A3786100D84D4A /* tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tests.h; sourceTree = "<group>"; };
 		5E22C221296C60CF004D8232 /* BinaryTree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BinaryTree; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E22C22B296C6109004D8232 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5E22C22C296C6109004D8232 /* binarySearchTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binarySearchTree.h; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 				5E22C22C296C6109004D8232 /* binarySearchTree.h */,
 				5E22C22D296C6109004D8232 /* binaryTree.h */,
 				5E22C22B296C6109004D8232 /* main.cpp */,
+				5E0F917029A3786100D84D4A /* tests.h */,
 			);
 			path = BinaryTree;
 			sourceTree = "<group>";
