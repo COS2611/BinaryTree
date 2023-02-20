@@ -285,5 +285,58 @@ static void test_swapSubtrees()
 	}
 }
 
+static void test_swapRoot()
+{
+	// Test 1: Swap root of an empty tree
+	{
+		bSearchTreeType<int> empty_tree;
+		empty_tree.swapRoot();
+		assert(empty_tree.isEmpty());
+	}
+
+	// Test 2: Swap root of a tree with only the root node
+	{
+		bSearchTreeType<int> root_only_tree;
+		root_only_tree.insert(5);
+		root_only_tree.swapRoot();
+		assert(root_only_tree.getRoot()->info == 5);
+		assert(root_only_tree.getRoot()->llink == NULL);
+		assert(root_only_tree.getRoot()->rlink == NULL);
+	}
+
+	// Test 3: Swap root of a tree with two levels
+	{
+		bSearchTreeType<int> two_level_tree;
+		two_level_tree.insert(5);
+		two_level_tree.getRoot()->llink = new binaryTreeNode<int>(3);
+		two_level_tree.getRoot()->rlink = new binaryTreeNode<int>(7);
+		two_level_tree.swapRoot();
+		assert(two_level_tree.getRoot()->info == 5);
+		assert(two_level_tree.getRoot()->llink->info == 7);
+		assert(two_level_tree.getRoot()->rlink->info == 3);
+	}
+
+	// Test 4: Swap root of a tree with three levels
+	{
+		bSearchTreeType<int> three_level_tree;
+		three_level_tree.insert(5);
+		three_level_tree.getRoot()->llink = new binaryTreeNode<int>(3);
+		three_level_tree.getRoot()->rlink = new binaryTreeNode<int>(7);
+		three_level_tree.getRoot()->llink->llink = new binaryTreeNode<int>(1);
+		three_level_tree.getRoot()->llink->rlink = new binaryTreeNode<int>(4);
+		three_level_tree.getRoot()->rlink->llink = new binaryTreeNode<int>(6);
+		three_level_tree.getRoot()->rlink->rlink = new binaryTreeNode<int>(9);
+		three_level_tree.swapRoot();
+		assert(three_level_tree.getRoot()->info == 5);
+		assert(three_level_tree.getRoot()->llink->info == 7);
+		assert(three_level_tree.getRoot()->rlink->info == 3);
+		assert(three_level_tree.getRoot()->llink->llink->info == 6);
+		assert(three_level_tree.getRoot()->llink->rlink->info == 9);
+		assert(three_level_tree.getRoot()->rlink->llink->info == 1);
+		assert(three_level_tree.getRoot()->rlink->rlink->info == 4);
+	}
+}
+
+
 
 #endif /* tests_h */

@@ -11,16 +11,17 @@
 
 int main()
 {
-	bSearchTreeType<int> treeRoot = enterNodes();
-	std::cout << "Number of nodes: " << treeRoot.treeNodeCount() << std::endl;
-	std::cout << "Number of Leaves: " << treeRoot.treeLeavesCount() << std::endl;
-	std::cout << "Tree height: " << treeRoot.treeHeight() << std::endl;
-	traverseTree(treeRoot);
+//	bSearchTreeType<int> treeRoot = enterNodes();
+//	std::cout << "Number of nodes: " << treeRoot.treeNodeCount() << std::endl;
+//	std::cout << "Number of Leaves: " << treeRoot.treeLeavesCount() << std::endl;
+//	std::cout << "Tree height: " << treeRoot.treeHeight() << std::endl;
+//	traverseTree(treeRoot);
 	
 	test_leavesCount();
 	test_nodeCount();
 	test_height();
 	test_swapSubtrees();
+	test_swapRoot();
 	
 	return 0;
 }
