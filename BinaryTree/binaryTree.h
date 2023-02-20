@@ -60,6 +60,8 @@ public:
       //Postcondition: root = NULL;
 	void swapSubtrees(binaryTreeNode<Type>* p);
 	// swaps the left and right subtrees of every node in the tree
+	void swapRoot();
+	// swaps only the left and right subtrees of the root node
 
     binaryTreeType(const binaryTreeType<Type>& otherTree);
       //copy constructor
@@ -321,18 +323,37 @@ void binaryTreeType<Type>::swapSubtrees(binaryTreeNode<Type>* p)
 	{
 		return;
 	}
+	else if (p->llink == NULL && p->rlink == NULL)
+	{
+		return;
+	}
+	
+	// Swap left and right subtrees of current node
+	binaryTreeNode<Type>* temp = p->llink;
+	p->llink = p->rlink;
+	p->rlink = temp;
 	
 	// Swap subtrees of left child
 	swapSubtrees(p->llink);
 	
 	// Swap subtrees of right child
 	swapSubtrees(p->rlink);
-	
-	// Swap left and right subtrees of current node
-	binaryTreeNode<Type>* temp = p->llink;
-	p->llink = p->rlink;
-	p->rlink = temp;
 }
+
+template <class Type>
+void binaryTreeType<Type>::swapRoot()
+{
+	if (root != NULL)
+	{
+		binaryTreeNode<Type> *temp = root->llink;
+		root->llink = root->rlink;
+		root->rlink = temp;
+	}
+	
+	// the only difference between swapRoot and swapNode is
+	// the resursive call for the left and right subtrees.
+}
+
 
 
 template<class Type>
