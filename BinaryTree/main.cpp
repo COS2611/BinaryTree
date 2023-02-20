@@ -18,6 +18,7 @@ int main()
 	
 	test_leavesCount();
 	test_nodeCount();
+	test_height();
 
 	return 0;
 }

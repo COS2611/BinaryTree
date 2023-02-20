@@ -196,4 +196,41 @@ static void test_leavesCount()
 	}
 }
 
+static void test_height()
+{
+	// Test 1: Check that the function returns 0 for an empty tree
+	{
+		   bSearchTreeType<int> empty_tree;
+		   assert(empty_tree.treeHeight() == 0);
+	}
+
+	// Test 2: Check that the function returns 1 for a tree with a single node
+	{
+		   bSearchTreeType<int> single_node_tree;
+		   single_node_tree.insert(5);
+		   assert(single_node_tree.treeHeight() == 1);
+	}
+
+	// Test 3: Check that the function returns the correct height for a tree with multiple nodes
+	{
+		   bSearchTreeType<int> multi_node_tree;
+		   multi_node_tree.insert(5);
+		   multi_node_tree.insert(3);
+		   multi_node_tree.insert(7);
+		   multi_node_tree.insert(1);
+		   multi_node_tree.insert(4);
+		   assert(multi_node_tree.treeHeight() == 3);
+	}
+
+	// Test 4: Check that the function returns the correct height for a tree with a single branch
+	{
+		   bSearchTreeType<int> single_branch_tree;
+		   single_branch_tree.insert(5);
+		   single_branch_tree.insert(3);
+		   single_branch_tree.insert(1);
+		   single_branch_tree.insert(4);
+		   assert(single_branch_tree.treeHeight() == 3);
+	}
+}
+
 #endif /* tests_h */
