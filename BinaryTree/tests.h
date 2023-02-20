@@ -233,4 +233,57 @@ static void test_height()
 	}
 }
 
+static void test_swapSubtrees()
+{
+	// Test 1: Swap subtrees of an empty tree
+	{
+		bSearchTreeType<int> empty_tree;
+		empty_tree.swapSubtrees(empty_tree.getRoot());
+		assert(empty_tree.isEmpty());
+	}
+
+	// Test 2: Swap subtrees of a tree with only the root node
+	{
+		bSearchTreeType<int> root_only_tree;
+		root_only_tree.insert(5);
+		root_only_tree.swapSubtrees(root_only_tree.getRoot());
+		assert(root_only_tree.getRoot()->info == 5);
+		assert(root_only_tree.getRoot()->llink == NULL);
+		assert(root_only_tree.getRoot()->rlink == NULL);
+	}
+
+	// Test 3: Swap subtrees of a tree with two levels
+	{
+		bSearchTreeType<int> two_level_tree;
+		two_level_tree.insert(5);
+		two_level_tree.getRoot()->llink = new binaryTreeNode<int>(3);
+		two_level_tree.getRoot()->rlink = new binaryTreeNode<int>(7);
+		two_level_tree.swapSubtrees(two_level_tree.getRoot());
+		assert(two_level_tree.getRoot()->info == 5);
+		assert(two_level_tree.getRoot()->llink->info == 7);
+		assert(two_level_tree.getRoot()->rlink->info == 3);
+	}
+
+	// Test 4: Swap subtrees of a tree with three levels
+	{
+		bSearchTreeType<int> three_level_tree;
+		three_level_tree.insert(5);
+		three_level_tree.getRoot()->llink = new binaryTreeNode<int>(3);
+		three_level_tree.getRoot()->rlink = new binaryTreeNode<int>(7);
+		three_level_tree.getRoot()->llink->llink = new binaryTreeNode<int>(1);
+		three_level_tree.getRoot()->llink->rlink = new binaryTreeNode<int>(4);
+		three_level_tree.getRoot()->rlink->llink = new binaryTreeNode<int>(6);
+		three_level_tree.getRoot()->rlink->rlink = new binaryTreeNode<int>(9);
+		three_level_tree.swapSubtrees(three_level_tree.getRoot());
+		assert(three_level_tree.getRoot()->info == 5);
+		assert(three_level_tree.getRoot()->llink->info == 7);
+		assert(three_level_tree.getRoot()->rlink->info == 3);
+		assert(three_level_tree.getRoot()->llink->llink->info == 9);
+		assert(three_level_tree.getRoot()->llink->rlink->info == 6);
+		assert(three_level_tree.getRoot()->rlink->llink->info == 4);
+		assert(three_level_tree.getRoot()->rlink->rlink->info == 1);
+	}
+}
+
+
 #endif /* tests_h */
