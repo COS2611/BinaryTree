@@ -15,10 +15,11 @@ int main()
 	std::cout << "Number of nodes: " << treeRoot.treeNodeCount() << std::endl;
 	std::cout << "Number of Leaves: " << treeRoot.treeLeavesCount() << std::endl;
 	std::cout << "Tree height: " << treeRoot.treeHeight() << std::endl;
+	traverseTree(treeRoot);
 	
 	test_leavesCount();
 	test_nodeCount();
 	test_height();
-
+	
 	return 0;
 }

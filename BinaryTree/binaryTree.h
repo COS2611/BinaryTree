@@ -175,12 +175,12 @@ void  binaryTreeType<Type>::copyTree
 template <class Type>
 void binaryTreeType<Type>::inorder(binaryTreeNode<Type> *p) const
 {
-    if (p != NULL)
-    {
-        inorder(p->llink);
-        cout << p->info << " ";
-        inorder(p->rlink);
-    }
+	if (p != NULL)
+	{
+		inorder(p->llink);
+		std::cout << p->info << " ";
+		inorder(p->rlink);
+	}
 }
 
 template <class Type>
@@ -188,7 +188,7 @@ void binaryTreeType<Type>::preorder(binaryTreeNode<Type> *p) const
 {
 	if (p != NULL)
 	{
-		cout<<p->info<<" ";
+		std::cout << p->info << " ";
 		preorder(p->llink);
 		preorder(p->rlink);
 	}
@@ -197,12 +197,12 @@ void binaryTreeType<Type>::preorder(binaryTreeNode<Type> *p) const
 template <class Type>
 void binaryTreeType<Type>::postorder(binaryTreeNode<Type> *p) const
 {
-    if (p != NULL)
-    {
-        postorder(p->llink);
-        postorder(p->rlink);
-        cout << p->info << " ";
-    }		
+	if (p != NULL)
+	{
+		postorder(p->llink);
+		postorder(p->rlink);
+		std::cout << p->info << " ";
+	}
 }
 
      //Overload the assignment operator
