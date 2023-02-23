@@ -62,6 +62,8 @@ public:
 	// swaps the left and right subtrees of every node in the tree
 	void swapRoot();
 	// swaps only the left and right subtrees of the root node
+	int doubleP(binaryTreeNode<Type> *p) const;
+	// returns the number of nodes in a binary tree that have two child nodes.
 
     binaryTreeType(const binaryTreeType<Type>& otherTree);
       //copy constructor
@@ -309,7 +311,7 @@ int binaryTreeType<Type>::leavesCount(binaryTreeNode<Type> *p) const
 	{
 		return 0;
 	}
-	else if (p->llink == NULL && p->rlink == NULL)
+	else if (p->llink == NULL && p->rlink == NULL)	// node is a leaf
 	{
 		return 1;
 	}
@@ -361,6 +363,24 @@ binaryTreeNode<Type>* binaryTreeType<Type>::getRoot() const
 {
 	return root;
 }
+
+
+template <class Type>
+int binaryTreeType<Type>::doubleP(binaryTreeNode<Type> *p) const
+{
+	if (p == NULL)
+	{
+		return 0;
+	}
+	int count = 0;
+	if (p->llink != NULL && p->rlink != NULL)	// node has two child nodes
+	{
+		count = 1;
+	}
+	count += doubleP(p->llink) + doubleP(p->rlink);
+	return count;
+}
+
 
 
 
