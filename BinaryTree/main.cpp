@@ -22,6 +22,7 @@ int main()
 	test_height();
 	test_swapSubtrees();
 	test_swapRoot();
+	test_doubleP();
 	
 	return 0;
 }

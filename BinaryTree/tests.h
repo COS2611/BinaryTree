@@ -337,6 +337,59 @@ static void test_swapRoot()
 	}
 }
 
+static void test_doubleP()
+{
+	// Test case 1: Empty tree
+	{
+		bSearchTreeType<int> emptyTree;
+		assert(emptyTree.doubleP(emptyTree.getRoot()) == 0);
+	}
 
+	// Test case 2: Tree with one node
+	{
+		bSearchTreeType<int> treeWithOneNode;
+		treeWithOneNode.insert(10);
+		assert(treeWithOneNode.doubleP(treeWithOneNode.getRoot()) == 0);
+	}
+
+	// Test case 3: Tree with two nodes, one parent and one child
+	{
+		bSearchTreeType<int> treeWithTwoNodes;
+		treeWithTwoNodes.insert(20);
+		treeWithTwoNodes.insert(10);
+		assert(treeWithTwoNodes.doubleP(treeWithTwoNodes.getRoot()) == 0);
+	}
+
+	// Test case 4: Tree with three nodes, one parent and two children
+	{
+		bSearchTreeType<int> treeWithThreeNodes;
+		treeWithThreeNodes.insert(20);
+		treeWithThreeNodes.insert(10);
+		treeWithThreeNodes.insert(30);
+		assert(treeWithThreeNodes.doubleP(treeWithThreeNodes.getRoot()) == 1);
+	}
+
+	// Test case 5: Tree with four nodes, one parent and three children
+	{
+		bSearchTreeType<int> treeWithFourNodes;
+		treeWithFourNodes.insert(20);
+		treeWithFourNodes.insert(10);
+		treeWithFourNodes.insert(30);
+		treeWithFourNodes.insert(5);
+		assert(treeWithFourNodes.doubleP(treeWithFourNodes.getRoot()) == 1);
+	}
+
+	// Test case 6: Tree with five nodes, two parents and three children
+	{
+		bSearchTreeType<int> treeWithFiveNodes;
+		treeWithFiveNodes.insert(20);
+		treeWithFiveNodes.insert(10);
+		treeWithFiveNodes.insert(30);
+		treeWithFiveNodes.insert(5);
+		treeWithFiveNodes.insert(25);
+		assert(treeWithFiveNodes.doubleP(treeWithFiveNodes.getRoot()) == 1);
+	}
+
+}
 
 #endif /* tests_h */
